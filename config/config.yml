@@ -1,0 +1,35 @@
+AppName: fileSyncGo
+LogPath: /data1/ms/log/fileSyncGo/
+envPath: /data1/ms/fileSyncGo/.env
+# mailStrategies: { 90: 30, 120: 20, 150: 10, 300: 5 }
+# NoticeEmail: ["guoqingzhe@hotmail.com"]
+
+Rsync:
+  rsyncParams: ["-avuzR", "-slt","--force", "--from0" ,  "--omit-dir-times","--timeout", "3", "--ignore-errors","--exclude", "*.git", "--exclude", "*.svn", "--exclude", "*.tmp", "--exclude", ".~tmp~/"]
+  pathList: [/template, /template.test, /resource]
+  moduleName: comos
+  baseDir: /data1/ms
+  rsyncBin: /usr/bin/rsync
+  port: 873
+  timeout: 10
+  maxProcesses: 160
+  maxInit: 12
+  maxRecovery: 6
+  dustbinSecond: 5
+
+HealthKeeper:
+  status:
+    ready: 0
+    dead: 1
+    recovery: 2
+    unhealth: 3
+  IPSPath: /data1/ms/fileSyncGo/loadIPs.php
+  devIPS: [140.143.13.22]
+  sleepTimes:
+    total: 4
+    ready: 5
+    dead: 3
+    unhealth: 3
+    recovery: 3
+    unhealthTryTime: 5
+    unhealthFatalTime: 3
